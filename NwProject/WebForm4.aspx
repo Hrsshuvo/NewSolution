@@ -1,0 +1,220 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WebForm4.aspx.cs" Inherits="NwProject.WebForm4" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="form-horizontal">
+<%--        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>--%>
+        <div class="card" style="border-top-color: red; border-top-style: solid; border-width: 2px">
+            <div class="card-body card-block">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblSuppliers" AssociatedControlID="SuppliersDropDownList" CssClass="control-label">Suppliers</asp:Label>
+                                <asp:DropDownList ID="SuppliersDropDownList" runat="server" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblPurchaseId" AssociatedControlID="txtPurchaseId" Font-Size="Medium" CssClass="control-label">Purchase Code</asp:Label>
+                                <asp:TextBox runat="server" ID="txtPurchaseId" Style="text-align: center" ReadOnly="true" CssClass="form-control" Font-Bold="true" Font-Size="Medium" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPurchaseId"
+                                    CssClass="text-danger" ErrorMessage="This field is required." />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblDate" AssociatedControlID="txtDate" Font-Size="Medium" CssClass="control-label">Purchase Date</asp:Label>
+                                <asp:TextBox runat="server" ID="txtDate" TextMode="Date" Style="text-align: center" CssClass="form-control" Font-Bold="true" Font-Size="Medium" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDate"
+                                  CssClass="text-danger" ErrorMessage="This field is required." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblCategories" AssociatedControlID="CategoriesDropDownList" CssClass="control-label">Categories</asp:Label>
+                                <asp:DropDownList ID="CategoriesDropDownList" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="CategoriesDropDownList_SelectedIndexChanged"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblItems" AssociatedControlID="ItemsDropDownList" CssClass="control-label">Items</asp:Label>
+                                <asp:DropDownList ID="ItemsDropDownList" runat="server" CssClass="form-control" AutoPostBack="true"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblBatch" AssociatedControlID="txtBatch" Font-Size="Medium" CssClass="control-label">Batch</asp:Label>
+                                <asp:TextBox runat="server" ID="txtBatch" Style="text-align: center" CssClass="form-control" Font-Bold="true" Font-Size="Medium" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblQty" AssociatedControlID="txtQty" Font-Size="Medium" CssClass="control-label">Quantity</asp:Label>
+                                <asp:TextBox runat="server" ID="txtQty" Style="text-align: center" CssClass="form-control" Font-Bold="true" Font-Size="Medium" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblCostPrice" AssociatedControlID="txtCostPrice" Font-Size="Medium" CssClass="control-label">Cost Price</asp:Label>
+                                <asp:TextBox runat="server" ID="txtCostPrice" Style="text-align: center" CssClass="form-control" Font-Bold="true" Font-Size="Medium" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblSellingPrice" AssociatedControlID="txtSellingPrice" Font-Size="Medium" CssClass="control-label">Selling Price</asp:Label>
+                                <asp:TextBox runat="server" ID="txtSellingPrice" Style="text-align: center" CssClass="form-control" Font-Bold="true" Font-Size="Medium" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblExpire" AssociatedControlID="txtExpire" Font-Size="Medium" CssClass="control-label">Expire</asp:Label>
+                                <asp:TextBox runat="server" ID="txtExpire" TextMode="Date" Style="text-align: center" CssClass="form-control" Font-Bold="true" Font-Size="Medium" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <br />
+                                <asp:Button runat="server" ID="AddButton" Text="Add" CssClass="btn btn-info" Width="100px" OnClick="AddButton_Click" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <br />
+                        <div class="form-group">
+                            <div class="card" border-top-style: solid; border-width: 2px">
+                                <div class="card-header" style="background-color:azure; text-align: center">
+                                    <h6>Purchase Order</h6>
+                                </div>
+                                <div class="card-body card-block">
+                                    <%--<div class="col-md-12">--%>
+                                        <asp:GridView ID="PurchaseGridView" runat="server" EmptyDataText="No Order Available Here" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateDeleteButton="false" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="10" ForeColor="Black" GridLines="Horizontal" AllowPaging="false" CellSpacing="10" OnRowDeleting="PurchaseGridView_RowDeleting" OnRowDataBound="PurchaseGridView_RowDataBound">
+                                            <Columns>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ImageUrl="~/Purchase/img/delete.png" OnClientClick="return confirm('Are You Sure Delete This Order')" runat="server" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Item">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblItem" runat="server" Text='<%#Eval("Item") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Batch">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblBatch" runat="server" Text='<%#Eval("Batch") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Qty">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblQty" runat="server" Text='<%#Eval("Qty") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Cost Price">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblCostPrice" runat="server" Text='<%#Eval("CostPrice") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Total Price">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTotalPrice" runat="server" Text='<%#Eval("TotalPrice") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Selling Price">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblSellingPrice" runat="server" Text='<%#Eval("SellingPrice") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Expire">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblExpire" runat="server" Text='<%#Eval("Expire") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <PagerStyle Font-Bold="true" Font-Size="Small" ForeColor="#3399FF" />
+                                        </asp:GridView>
+                                   <%-- </div>--%>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button style="padding: 5px 30px 5px 30px" type="button" class="btn btn-primary fa-pull-right" id="btnShowLogin">
+                                    Next <span class="fa fa-caret-up"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%--\\popup model start\\--%>
+        <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="ModalTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="ModalTitle">Payment Status</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblAmount" CssClass="col-md-2 control-label" Font-Bold="true" Text="Total Amount(Tk)" Font-Size="Medium"></asp:Label>
+                            <div class="col-md-10">
+                                <asp:TextBox runat="server" ID="txtAmount" CssClass="form-control" Font-Bold="true" Font-Size="Medium" Style="text-align: center" ReadOnly="true" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblDiscount" CssClass="col-md-2 control-label" Font-Bold="true" Text="Discount(Tk)" Font-Size="Medium"></asp:Label>
+                            <div class="col-md-10">
+                                <asp:TextBox runat="server" ID="txtDiscount" CssClass="form-control" Font-Bold="true" Font-Size="Medium" Style="text-align: center" ReadOnly="false" AutoPostBack="true" OnTextChanged="txtDiscount_TextChanged" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblGrandTotal" CssClass="col-md-2 control-label" Font-Bold="true" Font-Size="Medium" Text="Grand Total(Tk)"></asp:Label>
+                            <div class="col-md-10">
+                                <asp:TextBox runat="server" ID="txtGrandTotal" CssClass="form-control" Font-Bold="true" Font-Size="Medium" Style="text-align: center" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblIsPaid" CssClass="col-md-2 control-label" Font-Bold="true" Font-Size="Medium" Text="IsPaid"></asp:Label>
+                            <div class="form-check form-check-inline">
+                                <asp:RadioButton ID="PaidRadioButton" Text="Paid" runat="server" CssClass="form-control" GroupName="Ispaid" />
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <asp:RadioButton ID="DueRadioButton" Text="Due" runat="server" CssClass="form-control" GroupName="Ispaid" />
+                            </div>
+                        </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="PurchaseSubmitButton" Text="Submit" runat="server" Class="btn btn-info" OnClick="PurchaseSubmitButton_Click" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#btnShowLogin").click(function () {
+                $('#LoginModal').modal('show');
+            });
+        });
+    </script>
+</asp:Content>
